@@ -35,6 +35,6 @@ server.post('/v0/watchlist/oath', (req, res, next) => {
   })
 })
 
-server.listen(process.PORT || 8080, function () {
+server.listen(process.env.PORT || 8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
