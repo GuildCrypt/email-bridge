@@ -9,7 +9,7 @@ const server = restify.createServer({
 
 const cors = corsMiddleware({
   preflightMaxAge: 5, //Optional
-  origins: ['http://localhost:8081', 'https://guildcrypt.com'],
+  origins: ['http://localhost:8081', 'https://guildcrypt.com', 'https://guildcrypt-site-qa.herokuapp.com'],
   allowHeaders: ['API-Token'],
   exposeHeaders: ['API-Token-Expiry']
 })
