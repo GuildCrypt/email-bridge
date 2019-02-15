@@ -1,6 +1,7 @@
 const restify = require('restify')
 const watchOath = require('./lib/watchOath')
 const corsMiddleware = require('restify-cors-middleware')
+const subscribe = require('./lib/subscribe')
 
 const server = restify.createServer({
   name: 'email-server',
@@ -35,6 +36,25 @@ server.post('/v0/watchlist/oath', (req, res, next) => {
   })
 })
 
+server.post('/v0/subscribe/dex-in-a-box', (req, res, next) => {
+  subscribe(
+    req.params.firstName,
+    req.params.lastName,
+    req.params.email,
+    ['dex-in-a-box']
+  ).then(() => {
+    res.send()
+    next()
+  }, (err) => {
+    next(err)
+  })
+})
+
 server.listen(process.env.PORT || 8080, function () {
   console.log('%s listening at %s', server.name, server.url);
+});
+
+server.on('restifyError', (req, res, err, cb) => {
+  console.error(err)
+  return cb();
 });
